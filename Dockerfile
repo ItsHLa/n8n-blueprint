@@ -1,7 +1,7 @@
 FROM n8nio/n8n:latest
 
-# Set environment variables for better memory management
-ENV NODE_OPTIONS="--max-old-space-size=1024"
+# Set environment variables for strict 512MB memory limit
+ENV NODE_OPTIONS="--max-old-space-size=380"
 
 # Ensure the container listens on the correct port and host
 ENV N8N_PORT=10000

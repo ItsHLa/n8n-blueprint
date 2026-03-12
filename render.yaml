@@ -45,9 +45,11 @@ services:
           name: n8n-db
           property: password
 
-      # Stability & Performance to prevent 502s
+      # Stability & Performance for 512MB RAM
       - key: NODE_OPTIONS
-        value: --max-old-space-size=1024
+        value: --max-old-space-size=380
+      - key: N8N_DISABLE_PRODUCTION_MESSAGE
+        value: "true"
       - key: EXECUTIONS_DATA_PRUNE
         value: "true"
       - key: EXECUTIONS_DATA_MAX_AGE
