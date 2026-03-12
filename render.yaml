@@ -40,6 +40,26 @@ services:
         fromDatabase:
           name: n8n-db
           property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase:
+          name: n8n-db
+          property: password
+
+      # Stability & Performance to prevent 502s
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=1024
+      - key: EXECUTIONS_DATA_PRUNE
+        value: "true"
+      - key: EXECUTIONS_DATA_MAX_AGE
+        value: "168"
+      - key: EXECUTIONS_DATA_SAVE_ON_SUCCESS
+        value: "none"
+      - key: EXECUTIONS_DATA_SAVE_ON_ERROR
+        value: "all"
+      
+      # Health Check Port Alignment
+      - key: N8N_PORT
+        value: 10000
 
 databases:
   - name: n8n-db

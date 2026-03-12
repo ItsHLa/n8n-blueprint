@@ -1,0 +1,38 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": {
+    "n8n": {
+      "source": {
+        "repo": "ItsHLa/n8n-blueprint"
+      },
+      "config": {
+        "healthcheck": {
+          "path": "/healthz/readiness",
+          "interval": 10,
+          "timeout": 5,
+          "restartPolicy": "on-failure"
+        },
+        "numReplicas": 1
+      },
+      "env": {
+        "N8N_HOST": "0.0.0.0",
+        "N8N_PORT": "${{PORT}}",
+        "N8N_PROTOCOL": "https",
+        "NODE_ENV": "production",
+        "WEBHOOK_URL": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+        "DB_TYPE": "postgresdb",
+        "DB_POSTGRESDB_DATABASE": "railway",
+        "DB_POSTGRESDB_HOST": "${{PGHOST}}",
+        "DB_POSTGRESDB_PORT": "${{PGPORT}}",
+        "DB_POSTGRESDB_USER": "${{PGUSER}}",
+        "DB_POSTGRESDB_PASSWORD": "${{PGPASSWORD}}",
+        "N8N_ENCRYPTION_KEY": "${{N8N_ENCRYPTION_KEY}}",
+        "NODE_OPTIONS": "--max-old-space-size=1024",
+        "EXECUTIONS_DATA_PRUNE": "true",
+        "EXECUTIONS_DATA_MAX_AGE": "168",
+        "EXECUTIONS_DATA_SAVE_ON_SUCCESS": "none",
+        "EXECUTIONS_DATA_SAVE_ON_ERROR": "all"
+      }
+    }
+  }
+}
